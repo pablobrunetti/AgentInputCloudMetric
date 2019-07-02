@@ -1,13 +1,16 @@
 #!/usr/bin/env python
 import pika
 import sys
-from sqlite_CloudMetric import SqLiteCloudMetric
+from mysql_CloudMetric import MySQLCloudMetric
 from broker_rabbit import BrokerRabbitMQ
 import argparse
 
 def main(db_file):
-    sqlite = SqLiteCloudMetric()
+    sqlite = MySQLCloudMetric()
+    i = 0
     while(1):
+        i = i +1
+        print(i)
         rows = sqlite.select_metric_by_active(db_file)
         for row in rows:
             #'/home/pablo/sintetico.txt', 2, 'BrokerPabloNotebook', 'guest', 'guest', '172.17.0.2', '15672', 'client-req', 'RabbitMQ', 1
