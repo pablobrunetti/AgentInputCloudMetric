@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import pika
 import sys
 from mysql_CloudMetric import MySQLCloudMetric
 from broker_rabbit import BrokerRabbitMQ
