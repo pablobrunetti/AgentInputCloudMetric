@@ -23,4 +23,12 @@ class BrokerRabbitMQ():
         print(" [x] Sent %r:%r" % (topic, message))
 
 if __name__ == "__main__":
-     broker = BrokerRabbitMQ('10.61.1.34','5672','guest','gusest')
+    
+    
+    while(True):
+        broker = BrokerRabbitMQ('10.61.1.34','5672','guest','guest')
+        topic = 'error_error'
+        message = 'Transferindo'
+        broker.publicar('Cloud Metric',topic,message)
+        #broker.connection.close()
+    

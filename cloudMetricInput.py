@@ -26,19 +26,21 @@ def main(db_file):
                 #print(file_metric)
                 try:
                     # read file
-                    json_file = open(file_metric, 'r+')  
-                    first = json_file.read(0)
-                    #print('etapa 1')
+                    json_file = open(file_metric, 'r+') 
+                    #print(json_file) 
+                    #first = json_file.read(0)
+                    
                     #if(not first):
                     #    print('Arquivo vazio')
                     #    continue
                     message = json.load(json_file)
+                    #print(message)
                     #print('etapa 1')
                     #print(data)
                     #print(str(data['Timestamp']))
                         
                     #prinnt('Passou')    
-                    print(message)
+                    #print(message)
                     #message = 'Transmitindo'
                     #Zera o tamanho do arquivo
                     json_file.truncate(0)
@@ -48,6 +50,7 @@ def main(db_file):
                     #print('Saindoooo')
                     #return
                 except:
+                    #print('entrou')
                     continue
                     #print("Erro ao ler o arquivo " + file_metric)
                     #return
