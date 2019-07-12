@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 import sys
+import pika.exceptions as exceptions
+import pika
+import json
 
 class BrokerRabbitMQ():
     def __init__(self, host,port,username,password):
@@ -10,12 +13,14 @@ class BrokerRabbitMQ():
             self.channel = self.connection.channel()
             self.channel.exchange_declare(exchange='CloudMetric', exchange_type='topic')
             self.ativo = True
-            print("Conexao efetuada com sucesso")
-        except:
-            print("Problema ao se conectar ao broker")
+            #print("Conexao efetuada com sucesso")
+        except exceptions.ConnectionClosed as err:
+            print(err) 
             self.ativo = False
     def publicar(self,exchange,topic,message):
         self.channel.basic_publish(
-            exchange=exchange, routing_key=topic, body=message)
+            exchange=exchange, routing_key=topic, body=json.dumps(message))
         print(" [x] Sent %r:%r" % (topic, message))
-        
+
+if __name__ == "__main__":
+     broker = BrokerRabbitMQ('10.61.1.34','5672','guest','gusest')
