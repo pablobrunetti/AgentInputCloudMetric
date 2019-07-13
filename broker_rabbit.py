@@ -18,6 +18,8 @@ class BrokerRabbitMQ():
             print(err) 
             self.ativo = False
     def publicar(self,exchange,topic,message):
+        print(exchange)
+        print(topic)
         self.channel.basic_publish(
             exchange=exchange, routing_key=topic, body=json.dumps(message))
         print(" [x] Sent %r:%r" % (topic, message))

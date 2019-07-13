@@ -21,7 +21,9 @@ def main(db_file):
             
             if(broker.ativo):
                 #print(row)
+                
                 topic = row[2]
+                #print(topic)
                 file_metric = row[1]
                 #print(file_metric)
                 try:
@@ -45,7 +47,7 @@ def main(db_file):
                     #Zera o tamanho do arquivo
                     json_file.truncate(0)
                     json_file.close()
-                    broker.publicar('Cloud Metric',topic,message)
+                    broker.publicar('CloudMetric',topic,message)
                     broker.connection.close()
                     #print('Saindoooo')
                     #return
