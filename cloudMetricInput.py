@@ -25,6 +25,7 @@ def main(db_file):
                 topic = row[2]
                 #print(topic)
                 file_metric = row[1]
+                
                 #print(file_metric)
                 try:
                     # read file
