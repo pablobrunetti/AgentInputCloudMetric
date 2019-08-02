@@ -3,6 +3,9 @@ import sys
 import pika.exceptions as exceptions
 import pika
 import json
+import time
+import datetime
+import json
 
 class BrokerRabbitMQ():
     def __init__(self, host,port,username,password):
@@ -26,11 +29,15 @@ class BrokerRabbitMQ():
 
 if __name__ == "__main__":
     
-    broker = BrokerRabbitMQ('10.61.1.34','5672','guest','guest')
+    broker = BrokerRabbitMQ('10.65.1.8','5672','guest','guest')
+    
     while(True):
         
-        topic = 'error_error'
-        message = 'Transferindo'
+        topic = 'LogApache_LogApache'
+        timestamp  = datetime.datetime.utcnow().isoformat()
+                             
+        message = {'c77d0d8f-064c-4b24-9730-9bae4295e49b':{'LogApache':[{"timestamp": timestamp,"value": 5}]}}
+        #print(message)
         broker.publicar('CloudMetric',topic,message)
-        broker.connection.close()
+        time.sleep(5)
     

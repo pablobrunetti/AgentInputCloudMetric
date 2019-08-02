@@ -29,27 +29,28 @@ def main(db_file):
                 #print(file_metric)
                 try:
                     # read file
-                    json_file = open(file_metric, 'r+') 
-                    #print(json_file) 
-                    #first = json_file.read(0)
-                    
-                    #if(not first):
-                    #    print('Arquivo vazio')
-                    #    continue
-                    message = json.load(json_file)
-                    #print(message)
-                    #print('etapa 1')
-                    #print(data)
-                    #print(str(data['Timestamp']))
+                    if(file_metric != 'None'):
+                        json_file = open(file_metric, 'r+') 
+                        #print(json_file) 
+                        #first = json_file.read(0)
                         
-                    #prinnt('Passou')    
-                    #print(message)
-                    #message = 'Transmitindo'
-                    #Zera o tamanho do arquivo
-                    json_file.truncate(0)
-                    json_file.close()
-                    broker.publicar('CloudMetric',topic,message)
-                    broker.connection.close()
+                        #if(not first):
+                        #    print('Arquivo vazio')
+                        #    continue
+                        message = json.load(json_file)
+                        #print(message)
+                        #print('etapa 1')
+                        #print(data)
+                        #print(str(data['Timestamp']))
+                            
+                        #prinnt('Passou')    
+                        #print(message)
+                        #message = 'Transmitindo'
+                        #Zera o tamanho do arquivo
+                        json_file.truncate(0)
+                        json_file.close()
+                        broker.publicar('CloudMetric',topic,message)
+                        broker.connection.close()
                     #print('Saindoooo')
                     #return
                 except:
