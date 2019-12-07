@@ -4,6 +4,7 @@ from mysql_CloudMetric import MySQLCloudMetric
 from broker_rabbit import BrokerRabbitMQ
 import argparse
 import json
+import smbclient
 
 def main(db_file):
     sqlite = MySQLCloudMetric()
@@ -30,7 +31,15 @@ def main(db_file):
                 try:
                     # read file
                     if(file_metric != 'None'):
-                        json_file = open(file_metric, 'r+') 
+                        
+                        posEnd = file_metric.rfind('/')
+                        file_name = file_metric[posEnd+1:]
+                        server_ip = file_metric[6:posEnd]
+                        smb = smbclient.SambaClient(server=server_ip, share="experimentos",
+                                username='cloudmetric', password='nerds1203', domain='WORKGROUP')
+                        json_file = smb.open(file_name, 'r+') 
+                        
+                        #json_file = open(file_metric, 'r+') 
                         #print(json_file) 
                         #first = json_file.read(0)
                         
@@ -38,6 +47,7 @@ def main(db_file):
                         #    print('Arquivo vazio')
                         #    continue
                         message = json.load(json_file)
+                        print(message)
                         #print(message)
                         #print('etapa 1')
                         #print(data)
@@ -55,6 +65,7 @@ def main(db_file):
                     #return
                 except:
                     #print('entrou')
+                    
                     continue
                     #print("Erro ao ler o arquivo " + file_metric)
                     #return

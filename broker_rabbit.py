@@ -14,8 +14,8 @@ class BrokerRabbitMQ():
             self.channel.exchange_declare(exchange='CloudMetric', exchange_type='topic')
             self.ativo = True
             #print("Conexao efetuada com sucesso")
-        except exceptions.ConnectionClosed as err:
-            print(err) 
+        except:
+            #print(err) 
             self.ativo = False
     def publicar(self,exchange,topic,message):
         print(exchange)
